@@ -50,10 +50,6 @@ import java.util.stream.Collectors;
 @Deprecated
 public final class CubaScreens extends WebScreens implements WindowManager {
 
-    public CubaScreens(AppUI ui) {
-        super(ui);
-    }
-
     @Override
     public Collection<Window> getOpenWindows() {
         return getOpenedScreens().getAll().stream()
