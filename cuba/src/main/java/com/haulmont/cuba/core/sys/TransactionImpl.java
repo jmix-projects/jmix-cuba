@@ -18,7 +18,7 @@ package com.haulmont.cuba.core.sys;
 import com.haulmont.cuba.core.Transaction;
 import com.haulmont.cuba.core.TransactionParams;
 import io.jmix.core.Stores;
-import io.jmix.dataeclipselink.impl.EclipselinkPersistenceSupport;
+import io.jmix.eclipselink.impl.EclipselinkPersistenceSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.PlatformTransactionManager;

@@ -20,7 +20,7 @@ import com.haulmont.cuba.core.Transaction;
 import com.haulmont.cuba.core.TransactionParams;
 import com.haulmont.cuba.core.Transactions;
 import io.jmix.core.Stores;
-import io.jmix.dataeclipselink.impl.EclipselinkPersistenceSupport;
+import io.jmix.eclipselink.impl.EclipselinkPersistenceSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;

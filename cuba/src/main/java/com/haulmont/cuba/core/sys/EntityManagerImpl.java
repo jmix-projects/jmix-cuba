@@ -26,7 +26,7 @@ import io.jmix.core.common.util.Preconditions;
 import io.jmix.core.entity.EntityValues;
 import io.jmix.data.JmixQuery;
 import io.jmix.data.PersistenceHints;
-import io.jmix.dataeclipselink.impl.JmixEntityManager;
+import io.jmix.eclipselink.impl.JmixEntityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -22,7 +22,7 @@ import io.jmix.core.FetchPlan;
 import io.jmix.core.FetchPlanRepository;
 import io.jmix.data.JmixQuery;
 import io.jmix.data.PersistenceHints;
-import io.jmix.dataeclipselink.impl.JmixEclipseLinkQuery;
+import io.jmix.eclipselink.impl.JmixEclipseLinkQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
