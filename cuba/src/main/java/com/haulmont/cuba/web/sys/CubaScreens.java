@@ -556,13 +556,13 @@ public final class CubaScreens extends ScreensImpl implements Screens, WindowMan
     }
 
     @Override
-    protected void findMessagePack(Element element, String descriptorPath,
-                                   ComponentLoaderContext componentLoaderContext) {
+    protected void findMessageGroup(Element element, String descriptorPath,
+                                    ComponentLoaderContext componentLoaderContext) {
         String messagesPack = element.attributeValue("messagesPack");
         if (messagesPack != null) {
-            componentLoaderContext.setMessagesPack(messagesPack);
+            componentLoaderContext.setMessageGroup(messagesPack);
         } else {
-            super.findMessagePack(element, descriptorPath, componentLoaderContext);
+            super.findMessageGroup(element, descriptorPath, componentLoaderContext);
         }
     }
 

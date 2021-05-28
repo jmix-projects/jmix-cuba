@@ -62,7 +62,7 @@ public class CubaFragmentComponentLoader extends FragmentComponentLoader {
 
         String messagesPack = rootElement.attributeValue("messagesPack");
         if (messagesPack != null) {
-            innerContext.setMessagesPack(messagesPack);
+            innerContext.setMessageGroup(messagesPack);
         }
     }
 

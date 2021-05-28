@@ -96,7 +96,7 @@ public class CubaUiControllerDependencyInjector extends UiControllerDependencyIn
             if (xmlDescriptor != null) {
                 String messagePack = xmlDescriptor.attributeValue("messagesPack");
                 if (messagePack != null) {
-                    messageBundle.setMessagesPack(messagePack);
+                    messageBundle.setMessageGroup(messagePack);
                 }
             }
         }

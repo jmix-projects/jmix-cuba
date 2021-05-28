@@ -43,7 +43,7 @@ public class CubaFragments extends FragmentsImpl {
 
         String messagesPack = rootElement.attributeValue("messagesPack");
         if (messagesPack != null) {
-            innerContext.setMessagesPack(messagesPack);
+            innerContext.setMessageGroup(messagesPack);
         }
     }
 }
