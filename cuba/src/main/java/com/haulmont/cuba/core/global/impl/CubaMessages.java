@@ -30,7 +30,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Nullable;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -54,8 +56,6 @@ public class CubaMessages {
     public static final String EXT = ".properties";
 
     private static final Logger log = LoggerFactory.getLogger(CubaMessages.class);
-
-    protected Pattern enumSubclassPattern = Pattern.compile("\\$[1-9]");
 
     protected String confDir;
 
@@ -101,19 +101,15 @@ public class CubaMessages {
     public String getMessage(Enum caller, Locale locale) {
         checkNotNullArgument(caller, "Enum parameter 'caller' is null");
 
-        String className = caller.getClass().getName();
-        int i = className.lastIndexOf('.');
+        String declaringClassName = caller.getDeclaringClass().getName();
+        int i = declaringClassName.lastIndexOf('.');
         if (i > -1)
-            className = className.substring(i + 1);
+            declaringClassName = declaringClassName.substring(i + 1);
         // If enum has inner subclasses, its class name ends with "$1", "$2", ... suffixes. Cut them off.
-        Matcher matcher = enumSubclassPattern.matcher(className);
-        if (matcher.find()) {
-            className = className.substring(0, matcher.start());
-        }
 
         return getMessage(
                 getPackName(caller.getClass()),
-                className + "." + caller.name(),
+                declaringClassName + "." + caller.name(),
                 locale
         );
     }
