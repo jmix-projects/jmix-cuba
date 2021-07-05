@@ -18,8 +18,8 @@ package com.haulmont.cuba.core.global.impl;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import io.jmix.core.LocaleResolver;
 import com.haulmont.cuba.core.global.UserSessionSource;
+import io.jmix.core.LocaleResolver;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -27,12 +27,10 @@ import org.apache.commons.text.StringTokenizer;
 import org.apache.commons.text.TextStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Nullable;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -41,8 +39,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static io.jmix.core.common.util.Preconditions.checkNotNullArgument;
 
