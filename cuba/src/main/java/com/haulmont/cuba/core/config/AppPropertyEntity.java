@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.haulmont.cuba.gui.app.core.config;
+package com.haulmont.cuba.core.config;
 
 import com.google.common.base.Strings;
 import com.haulmont.chile.core.datatypes.Datatypes;
@@ -28,8 +28,6 @@ import io.jmix.core.metamodel.annotation.JmixProperty;
 import io.jmix.core.metamodel.datatype.Datatype;
 import io.jmix.core.metamodel.datatype.impl.NumberDatatype;
 import io.jmix.core.metamodel.datatype.impl.StringDatatype;
-import io.jmix.ui.screen.MessageBundle;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 

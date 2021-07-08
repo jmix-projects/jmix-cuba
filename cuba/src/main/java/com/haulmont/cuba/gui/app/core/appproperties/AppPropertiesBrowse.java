@@ -16,7 +16,7 @@
 
 package com.haulmont.cuba.gui.app.core.appproperties;
 
-import com.haulmont.cuba.gui.app.core.config.AppPropertyEntity;
+import com.haulmont.cuba.core.config.AppPropertyEntity;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.components.actions.RefreshAction;
 import com.haulmont.cuba.settings.Settings;
@@ -25,6 +25,7 @@ import io.jmix.ui.action.Action;
 import io.jmix.ui.component.Button;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.inject.Named;
 import java.util.List;
@@ -36,7 +37,7 @@ public class AppPropertiesBrowse extends AbstractMainWindow {
     @Autowired
     private AppPropertiesDatasource paramsDs;
 
-    @Named("paramsTable.editValue")
+    @Qualifier("paramsTable.editValue")  //??? or Named analogue of @Named
     private Action editValueAction;
 
     @Named("paramsTable.refresh")
