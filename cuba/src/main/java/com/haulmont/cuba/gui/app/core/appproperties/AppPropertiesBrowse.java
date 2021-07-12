@@ -17,27 +17,31 @@
 package com.haulmont.cuba.gui.app.core.appproperties;
 
 import com.haulmont.cuba.core.config.AppPropertyEntity;
-import com.haulmont.cuba.gui.components.*;
+import com.haulmont.cuba.gui.WindowManager;
+import com.haulmont.cuba.gui.components.AbstractWindow;
 import com.haulmont.cuba.gui.components.actions.RefreshAction;
 import com.haulmont.cuba.settings.Settings;
 import io.jmix.core.common.util.ParamsMap;
 import io.jmix.ui.action.Action;
-import io.jmix.ui.component.Button;
+import io.jmix.ui.component.*;
+import io.jmix.ui.screen.UiController;
+import io.jmix.ui.screen.UiDescriptor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.inject.Named;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class AppPropertiesBrowse extends AbstractMainWindow {
+@UiController("appProperties")
+@UiDescriptor("appproperties-browse.xml")
+public class AppPropertiesBrowse extends AbstractWindow {
 
     @Autowired
     private AppPropertiesDatasource paramsDs;
 
-    @Qualifier("paramsTable.editValue")  //??? or Named analogue of @Named
+    @Named("paramsTable.editValue")
     private Action editValueAction;
 
     @Named("paramsTable.refresh")
@@ -66,7 +70,7 @@ public class AppPropertiesBrowse extends AbstractMainWindow {
         });
         paramsTable.setItemClickAction(editValueAction);
 
-        paramsTable.sort("name", SortDirection.ASCENDING);
+        paramsTable.sort("name", Table.SortDirection.ASCENDING);
 
         searchField.addValueChangeListener(e -> {
             paramsDs.refresh(ParamsMap.of("name", e.getValue()));
@@ -96,7 +100,7 @@ public class AppPropertiesBrowse extends AbstractMainWindow {
     }
 
     public void editValue() {
-        Window editor = openWindow("appPropertyEditor", OpenType.DIALOG,
+        com.haulmont.cuba.gui.components.Window editor = openWindow("appPropertyEditor", WindowManager.OpenType.DIALOG,
                 ParamsMap.of("item", paramsDs.getItem()));
         editor.addCloseWithCommitListener(() -> {
             List<AppPropertyEntity> entities = paramsDs.loadAppPropertyEntities();
@@ -116,7 +120,7 @@ public class AppPropertiesBrowse extends AbstractMainWindow {
                 .filter(appPropertyEntity -> !appPropertyEntity.getCategory())
                 .collect(Collectors.toList());
         if (!exported.isEmpty()) {
-            openWindow("appPropertiesExport", OpenType.DIALOG, ParamsMap.of("exported", exported));
+            openWindow("appPropertiesExport", WindowManager.OpenType.DIALOG, ParamsMap.of("exported", exported));
         }
     }
 
