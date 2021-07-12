@@ -23,6 +23,8 @@ import com.haulmont.cuba.core.config.type.*;
 import com.haulmont.cuba.core.global.*;
 import com.haulmont.cuba.core.sys.AppContext;
 import io.jmix.core.Entity;
+import io.jmix.core.JmixModuleDescriptor;
+import io.jmix.core.JmixModulesProcessor;
 import io.jmix.core.common.util.ReflectionHelper;
 import io.jmix.core.metamodel.datatype.Datatype;
 import io.jmix.core.metamodel.datatype.impl.EnumClass;
@@ -55,7 +57,7 @@ import java.util.stream.Collectors;
 @Component(AppPropertiesLocator.NAME)
 public class AppPropertiesLocator {
 
-    public static final String NAME = "cuba_AppPropertiesLocator";
+    public static final String NAME = "jmix_AppPropertiesLocator";
 
     private final Logger log = LoggerFactory.getLogger(AppPropertiesLocator.class);
 
@@ -79,6 +81,9 @@ public class AppPropertiesLocator {
     @Autowired
     protected UserSessionSource userSessionSource;
 
+    @Autowired
+    private JmixModulesProcessor jmixModulesProcessor;
+
     public List<AppPropertyEntity> getAppProperties() {
         log.trace("Locating app properties");
 
@@ -97,7 +102,11 @@ public class AppPropertiesLocator {
                 if (interfacesCache == null) {
                     log.trace("Locating config interfaces");
                     Set<String> cache = new HashSet<>();
-                    for (String rootPackage : metadata.getRootPackages()) {
+                    List<JmixModuleDescriptor> allModules = jmixModulesProcessor.getJmixModules().getAll();
+                    List<String> idList = allModules.stream()
+                            .map(JmixModuleDescriptor::getId)
+                            .collect(Collectors.toList());
+                    for (String rootPackage : idList) {
                         String packagePrefix = rootPackage.replace(".", "/") + "/**/*.class";
                         String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + packagePrefix;
                         Resource[] resources;

@@ -80,8 +80,4 @@ public class CubaMetadata extends io.jmix.core.impl.MetadataImpl implements Meta
         return datatypeRegistry;
     }
 
-    public List<String> getRootPackages() {
-        return Collections.unmodifiableList(rootPackages);
-    }
-
 }
