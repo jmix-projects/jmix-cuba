@@ -18,16 +18,14 @@ package com.haulmont.cuba.client.sys.cache;
 
 import com.haulmont.cuba.client.sys.ClientCacheManager;
 import com.haulmont.cuba.core.app.ConfigStorageService;
-import com.haulmont.cuba.core.sys.AppContext;
 import com.haulmont.cuba.security.global.NoUserSessionException;
 import com.haulmont.cuba.security.global.UserSession;
+import io.jmix.core.security.SecurityContextHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Collections;
 import java.util.Map;
@@ -98,7 +96,9 @@ public class ConfigCacheStrategy implements CachingStrategy {
         }
 
         try {
-            AppContext.setSecurityContext(new SecurityContext(userSession));
+//            AppContext.setSecurityContext(new SecurityContext(userSession));
+
+            SecurityContextHelper.setAuthentication(userSession.getAuthentication());
 
             Map<String, String> cachedPropertiesFromServer =
                     Collections.unmodifiableMap(configStorageService.getDbProperties());
@@ -116,8 +116,9 @@ public class ConfigCacheStrategy implements CachingStrategy {
         } catch (Exception e) {
             log.error("Unable to update config storage cache", e);
         } finally {
-            AppContext.setSecurityContext(null);
+//            AppContext.setSecurityContext(null);
 
+            SecurityContextHelper.setAuthentication(null);
             backgroundUpdateTriggered = false;
         }
     }

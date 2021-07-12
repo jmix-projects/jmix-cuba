@@ -25,8 +25,10 @@ import io.jmix.core.MetadataTools;
 import io.jmix.core.impl.MetadataLoader;
 import io.jmix.core.metamodel.datatype.DatatypeRegistry;
 import io.jmix.core.metamodel.model.MetaClass;
-
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Collections;
+import java.util.List;
 
 public class CubaMetadata extends io.jmix.core.impl.MetadataImpl implements Metadata {
 
@@ -76,6 +78,10 @@ public class CubaMetadata extends io.jmix.core.impl.MetadataImpl implements Meta
     @Override
     public DatatypeRegistry getDatatypes() {
         return datatypeRegistry;
+    }
+
+    public List<String> getRootPackages() {
+        return Collections.unmodifiableList(rootPackages);
     }
 
 }
