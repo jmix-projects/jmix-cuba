@@ -21,8 +21,6 @@ import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.components.AbstractWindow;
 import com.haulmont.cuba.gui.components.ResizableTextArea;
 import io.jmix.ui.WindowParam;
-import io.jmix.ui.screen.UiController;
-import io.jmix.ui.screen.UiDescriptor;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -31,8 +29,6 @@ import java.util.Map;
 /**
  * Controller of the {@code appproperties-export.xml} screen
  */
-@UiController("appPropertiesExport")
-@UiDescriptor("appproperties-export.xml")
 public class AppPropertiesExport extends AbstractWindow {
 
     @WindowParam

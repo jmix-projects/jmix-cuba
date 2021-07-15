@@ -43,8 +43,8 @@
         </fieldGroup>
         <label id="cannotEditValueLabel" value="msg://cannotEditValue" visible="false" width="100%"/>
         <hbox align="BOTTOM_LEFT" spacing="true">
-            <button caption="mainMsg://actions.Ok" action="okAction" icon="EDITOR_OK"/>
-            <button caption="mainMsg://actions.Cancel" action="cancelAction" icon="EDITOR_CANCEL"/>
+            <button caption="msg://actions.Ok" action="okAction" icon="EDITOR_OK"/>
+            <button caption="msg://actions.Cancel" action="cancelAction" icon="EDITOR_CANCEL"/>
         </hbox>
     </layout>
 </window>

@@ -17,21 +17,17 @@
 package com.haulmont.cuba.gui.app.core.appproperties;
 
 import com.haulmont.chile.core.datatypes.DatatypeRegistry;
-import com.haulmont.cuba.client.sys.ConfigurationClientImpl;
 import com.haulmont.cuba.core.app.ConfigStorageService;
 import com.haulmont.cuba.core.config.AppPropertyEntity;
 import com.haulmont.cuba.core.global.AppBeans;
-import com.haulmont.cuba.core.global.Configuration;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.gui.UiComponents;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.data.Datasource;
 import io.jmix.core.metamodel.datatype.Datatype;
 import io.jmix.core.metamodel.datatype.impl.BooleanDatatype;
-import io.jmix.ui.UiComponents;
 import io.jmix.ui.WindowParam;
-import io.jmix.ui.screen.UiController;
-import io.jmix.ui.screen.UiDescriptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +42,6 @@ import java.util.function.Function;
 /**
  * Controller of the {@code appproperties-edit.xml} screen
  */
-@UiController("appPropertyEditor")
-@UiDescriptor("appproperties-edit.xml")
 public class AppPropertiesEdit extends AbstractWindow {
 
     private static final Logger log = LoggerFactory.getLogger(AppPropertiesEdit.class);
@@ -107,7 +101,7 @@ public class AppPropertiesEdit extends AbstractWindow {
                         });
                         return passwordField;
                     } else {
-                        TextField<Object> textField = uiComponents.create(TextField.NAME);
+                        io.jmix.ui.component.TextField<Object> textField = uiComponents.create(TextField.NAME);
                         textField.setValue(item.getCurrentValue());
 
                         try {
@@ -148,22 +142,22 @@ public class AppPropertiesEdit extends AbstractWindow {
         appPropertyDs.setItem(metadata.getTools().copy(item));
     }
 
-    private Component createLookupField(List<String> values, String currentValue) {
+    private LookupField<String> createLookupField(List<String> values, String currentValue) {
         LookupField<String> lookupField = uiComponents.create(LookupField.NAME);
         lookupField.setOptionsList(values);
         lookupField.setValue(currentValue);
         lookupField.addValueChangeListener(e -> {
             appPropertyDs.getItem().setCurrentValue(e.getValue());
         });
-        return (Component) lookupField;
+        return lookupField;
     }
 
     public void ok() {
         AppPropertyEntity appPropertyEntity = appPropertyDs.getItem();
 
         // Save property through the client-side cache to ensure it is updated in the cache immediately
-        Configuration configuration = AppBeans.get(Configuration.class);
-        ConfigStorageService configStorageService = ((ConfigurationClientImpl) configuration).getConfigStorageService();
+        ConfigStorageService configStorageService = AppBeans.get(ConfigStorageService.class);
+//        ConfigStorageService configStorageService = ((ConfigurationClientImpl) configuration).getConfigStorageService();
         configStorageService.setDbProperty(appPropertyEntity.getName(), appPropertyEntity.getCurrentValue());
 
         close(COMMIT_ACTION_ID);

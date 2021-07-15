@@ -18,7 +18,6 @@ package com.haulmont.cuba.core.app;
 
 import com.haulmont.cuba.core.config.AppPropertiesLocator;
 import com.haulmont.cuba.core.config.AppPropertyEntity;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Nullable;
@@ -26,7 +25,6 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 
-@Primary //????
 @Service(ConfigStorageService.NAME)
 public class ConfigStorageServiceBean implements ConfigStorageService {
 

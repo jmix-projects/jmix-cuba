@@ -45,12 +45,12 @@
                 <textField id="searchField" />
                 <button action="paramsTable.refresh"/>
                 <button action="paramsTable.editValue"/>
-                <button id="exportBtn" enable="false" invoke="exportAsSql" icon="icons/download.png"
-                        description="mainMsg://actions.Export"/>
+                <button id="exportBtn" enable="false" invoke="exportAsSql" icon="DOWNLOAD"
+                        description="msg://actions.Export"/>
             </buttonsPanel>
             <actions>
                 <action id="editValue" invoke="editValue" enable="false"
-                        caption="mainMsg://actions.Edit" icon="EDIT_ACTION"/>
+                        caption="msg://actions.Edit" icon="EDIT_ACTION"/>
                 <action id="refresh"/>
             </actions>
             <columns>

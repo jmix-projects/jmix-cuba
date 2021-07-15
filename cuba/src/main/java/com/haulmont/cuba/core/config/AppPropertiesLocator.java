@@ -21,10 +21,11 @@ import com.haulmont.chile.core.datatypes.Datatypes;
 import com.haulmont.cuba.core.config.defaults.*;
 import com.haulmont.cuba.core.config.type.*;
 import com.haulmont.cuba.core.global.*;
+import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.core.global.LoadContext;
+import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.core.sys.AppContext;
-import io.jmix.core.Entity;
-import io.jmix.core.JmixModuleDescriptor;
-import io.jmix.core.JmixModulesProcessor;
+import io.jmix.core.*;
 import io.jmix.core.common.util.ReflectionHelper;
 import io.jmix.core.metamodel.datatype.Datatype;
 import io.jmix.core.metamodel.datatype.impl.EnumClass;
@@ -57,7 +58,7 @@ import java.util.stream.Collectors;
 @Component(AppPropertiesLocator.NAME)
 public class AppPropertiesLocator {
 
-    public static final String NAME = "jmix_AppPropertiesLocator";
+    public static final String NAME = "cuba_AppPropertiesLocator";
 
     private final Logger log = LoggerFactory.getLogger(AppPropertiesLocator.class);
 
@@ -83,6 +84,8 @@ public class AppPropertiesLocator {
 
     @Autowired
     private JmixModulesProcessor jmixModulesProcessor;
+    @Autowired
+    private FetchPlanRepository fetchPlanRepository;
 
     public List<AppPropertyEntity> getAppProperties() {
         log.trace("Locating app properties");
@@ -193,10 +196,12 @@ public class AppPropertiesLocator {
     }
 
     protected List<com.haulmont.cuba.core.entity.Config> loadDbContent() {
+        FetchPlan appProperties = fetchPlanRepository.getFetchPlan(com.haulmont.cuba.core.entity.Config.class, "appProperties");
+
         LoadContext<com.haulmont.cuba.core.entity.Config> loadContext =
                 LoadContext.create(com.haulmont.cuba.core.entity.Config.class).setQuery(
                         LoadContext.createQuery("select c from sys$Config c")
-                ).setView("appProperties");
+                ).setFetchPlan(appProperties);
         return dataManager.loadList(loadContext);
     }
 

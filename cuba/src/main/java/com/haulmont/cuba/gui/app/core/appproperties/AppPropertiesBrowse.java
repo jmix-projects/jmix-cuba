@@ -24,8 +24,6 @@ import com.haulmont.cuba.settings.Settings;
 import io.jmix.core.common.util.ParamsMap;
 import io.jmix.ui.action.Action;
 import io.jmix.ui.component.*;
-import io.jmix.ui.screen.UiController;
-import io.jmix.ui.screen.UiDescriptor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,8 +32,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@UiController("appProperties")
-@UiDescriptor("appproperties-browse.xml")
 public class AppPropertiesBrowse extends AbstractWindow {
 
     @Autowired

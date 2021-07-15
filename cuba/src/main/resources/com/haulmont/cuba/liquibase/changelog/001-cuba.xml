@@ -260,6 +260,9 @@
             <column name="ID" type="${uuid.type}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="VERSION" type="int" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
             <column name="CREATE_TS" type="datetime"/>
             <column name="CREATED_BY" type="varchar(50)"/>
             <column name="UPDATE_TS" type="datetime"/>
