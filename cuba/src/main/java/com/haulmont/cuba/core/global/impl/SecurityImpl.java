@@ -147,9 +147,4 @@ public class SecurityImpl implements Security {
         }
         return isEntityAttrPermitted(metaClass, propertyPath.getMetaProperty().getName(), access);
     }
-
-    @Override
-    public boolean isGraphQLPermitted(String endpointID) {
-        return secureOperations.isGraphQLPermitted(endpointID, policyStore);
-    }
 }

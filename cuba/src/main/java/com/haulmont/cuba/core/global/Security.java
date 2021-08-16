@@ -142,14 +142,6 @@ public interface Security {
      * @param name specific permission id
      */
     boolean isSpecificPermitted(String name);
-
-    /**
-     * Check if current user has a graphQL permission.
-     *
-     * @param endpointID graphQL permission id
-     */
-    boolean isGraphQLPermitted(String endpointID);
-
     /**
      * Check if current user has a specific permission.
      *
