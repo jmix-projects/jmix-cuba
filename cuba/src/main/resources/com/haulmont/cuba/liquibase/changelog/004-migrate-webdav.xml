@@ -104,9 +104,7 @@
         </preConditions>
 
         <addColumn tableName="WEBDAV_WEBDAV_CREDENTIALS">
-            <column name="USERNAME" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="USERNAME" type="varchar(255)"/>
         </addColumn>
         <update tableName="WEBDAV_WEBDAV_CREDENTIALS">
             <column name="USERNAME" valueComputed="(select u.USERNAME from SEC_USER u where u.ID = USER_ID)"/>
@@ -116,6 +114,15 @@
         <renameColumn tableName="WEBDAV_WEBDAV_CREDENTIALS" oldColumnName="UPDATE_TS" newColumnName="LAST_MODIFIED_DATE" columnDataType="datetime"/>
         <renameColumn tableName="WEBDAV_WEBDAV_CREDENTIALS" oldColumnName="UPDATED_BY" newColumnName="LAST_MODIFIED_BY" columnDataType="varchar(255)"/>
         <renameColumn tableName="WEBDAV_WEBDAV_CREDENTIALS" oldColumnName="DELETE_TS" newColumnName="DELETED_DATE" columnDataType="datetime"/>
+    </changeSet>
+
+    <changeSet id="60" author="migrator">
+        <validCheckSum>1:any</validCheckSum>
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="WEBDAV_WEBDAV_CREDENTIALS"/>
+        </preConditions>
+
+        <dropNotNullConstraint tableName="WEBDAV_WEBDAV_CREDENTIALS" columnName="USER_ID" columnDataType="${uuid.type}"/>
     </changeSet>
 
 </databaseChangeLog>
