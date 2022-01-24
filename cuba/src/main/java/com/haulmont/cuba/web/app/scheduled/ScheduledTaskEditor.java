@@ -16,6 +16,7 @@
 
 package com.haulmont.cuba.web.app.scheduled;
 
+import com.google.common.base.Strings;
 import com.haulmont.cuba.core.app.SchedulingService;
 import com.haulmont.cuba.core.app.scheduled.MethodInfo;
 import com.haulmont.cuba.core.app.scheduled.MethodParameterInfo;
@@ -220,8 +221,13 @@ public class ScheduledTaskEditor extends AbstractEditor<ScheduledTask> {
 
     private void initUserNameField() {
         userNameField.setOptionStyleProvider(UserDetails::getUsername);
-        userNameField.addValueChangeListener(e -> taskDs.getItem().setUserName(e.getValue().getUsername()));
+        userNameField.addValueChangeListener(e -> taskDs.getItem().setUserName(e.getValue() == null ? null : e.getValue().getUsername()));
         userNameField.setSearchExecutor((searchString, searchParams) -> new ArrayList<>(userRepository.getByUsernameLike(searchString)));
+        userNameField.setEnterPressHandler(enterPressEvent -> {
+            if (Strings.isNullOrEmpty(enterPressEvent.getText())) {
+                userNameField.clear();
+            }
+        });
     }
 
     protected void setSchedulingTypeField(SchedulingType value) {
