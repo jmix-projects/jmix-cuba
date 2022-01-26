@@ -220,7 +220,7 @@ public class ScheduledTaskEditor<T extends Entity & UserDetails> extends Abstrac
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     private void initUserNameField() {
-        userNameField.setOptionStyleProvider(UserDetails::getUsername);
+        userNameField.setOptionStyleProvider(item -> item.getUsername());
         userNameField.addValueChangeListener(e -> taskDs.getItem().setUserName(e.getValue() == null ? null : e.getValue().getUsername()));
         userNameField.setSearchExecutor((searchString, searchParams) -> new ArrayList(userRepository.getByUsernameLike(searchString)));
     }
